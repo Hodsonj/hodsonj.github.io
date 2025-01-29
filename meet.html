@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meet Julian</title>
     <style>
+/* Base styles */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -29,7 +30,7 @@ body {
     display: flex;
     flex-direction: row;
     position: absolute;
-    top: 50px; /* Adjust positioning */
+    top: 50px;
     left: 500px;
 }
 
@@ -63,9 +64,53 @@ body {
     margin-left: 500px;
 }
 
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack the headshot and text vertically */
+        justify-content: flex-start;
+        align-items: center;
+    }
 
+    .headshot {
+        width: 200px; /* Adjust headshot size for mobile */
+        height: 200px;
+        margin-bottom: -100px; /* Space between image and text */
+        top: -300px;
+        left: 100px;
+    }
 
+    .text-container {
+        position: relative;
+        top: 0;
+        left: 0;
+        text-align: center; /* Center the text */
+        margin-top: 20px;
+    }
 
+    .text {
+        font-size: 40px; /* Smaller font size on mobile */
+        left: -100px;
+        margin-top: -390px;
+    }
+
+    .text-box {
+        margin-left: -80px;
+        padding: 20px;
+        font-size: 16px; /* Adjust text size for mobile */
+    }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+    .text {
+        font-size: 30px; /* Further reduce text size for small screens */
+    }
+
+    .text-box {
+        font-size: 14px; /* Adjust text size further */
+    }
+}
     </style>
 </head>
 <body>
