@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet Julian</title>
+    <style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #edecec;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 50px; /* Adjust positioning */
+    left: 500px;
+}
+
+.text {
+    font-size: 60px;
+    font: italic small-caps lighter 70px/2 cursive;
+    color: #b47d7d;
+    font-weight: lighter;
+    margin: 0 10px;
+    margin-top: -300px;
+}
+
+.headshot {
+    width: 430px;
+    height: 430px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    left: 10px;
+}
+
+.text-box {
+    width: 100%;
+    max-width: 350px;
+    margin-top: 50px;
+    padding: 30px;
+    font-size: 18px;
+    color: #000;
+    text-align: left;
+    line-height: 1.6;
+    margin-left: 500px;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="headshot.png" alt="Julian's Headshot" class="headshot"> <!-- Add Julian's headshot image here -->
+        <div class="text-container">
+            <div class="text meet animate-text">Meet</div>
+            <div class="text julian animate-text">Julian</div>
+        </div>
+    </div>
+
+    <div class="text-box">
+        <strong>Strengths:</strong>
+        <nav>- Music dances to him</nav>
+        <nav>- Fascinating laugh</nav>
+        <nav>- Humble</nav>
+
+        <strong>Weaknesses:</strong>
+        <nav>- Loves too hard</nav>
+        <nav>- Cares too deeply</nav>
+        <nav>- Lack of trips to South America</nav>
+
+        <strong>Instagram:</strong>
+        <nav>@juliandubeck</nav>
+    </div>
+
+</body>
+</html>

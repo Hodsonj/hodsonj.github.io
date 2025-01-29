@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congrats!</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background-image: url('galaxy2.jpeg'); /* Replace 'your-image.png' with the actual image URL or file path */
+            background-size: cover; /* Ensures the image covers the entire background */
+            background-position: center center; /* Centers the image */
+            position: relative; /* Needed for proper positioning of the stars and other elements */
+            flex-direction: column; /* Stack content vertically */
+            text-align: center; /* Centers the content horizontally */
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #fff;
+            z-index: 1;
+            position: relative;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+            margin-bottom: 20px; /* Adds space between the heading and the button */
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgb(0, 183, 255);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            box-shadow: 0 0 20px 5px gold, 0 0 40px 10px rgba(255, 238, 0, 0.8);
+        }
+
+        .trail {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: gold;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 5px rgb(181, 216, 237);
+            pointer-events: none;
+        }
+
+        .continue-btn {
+            font-size: 16px;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #333;
+            text-transform: uppercase;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .continue-btn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+    </style>
+    <!-- Include GSAP and MotionPathPlugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+</head>
+<body>
+    <h1>Congrats!</h1>
+    <div class="shooting-star"></div>
+    <button class="continue-btn" onclick="window.location.href = 'meet.html';">Continue</button>
+
+    <script>
+        // Register the MotionPathPlugin (this enables GSAP to animate along a path)
+        gsap.registerPlugin(MotionPathPlugin);
+
+        const star = document.querySelector(".shooting-star");
+
+        // Set the star's initial position off-screen at the left
+        gsap.set(star, { x: -800, y: -200 });
+
+        // Create the glowing trail effect (this creates a new "trail" element each time)
+        function createTrail(x, y) {
+            const trail = document.createElement("div");
+            trail.classList.add("trail"); // Add the "trail" class for styling
+            document.body.appendChild(trail); // Add the trail element to the body
+
+            gsap.set(trail, { x: x, y: y }); // Set the initial position of the trail based on star's position
+            gsap.to(trail, {
+                duration: 1, // The duration of the trail fade-out animation
+                opacity: 0, // Fade the trail out
+                scale: 0, // Shrink the trail to 0
+                onComplete: () => {
+                    trail.remove(); // Remove the trail element once the animation is complete
+                }
+            });
+        }
+
+        // Define the motion path for the star (where the star will move)
+        gsap.to(star, {
+            duration: 4.5, // Duration for a full loop
+            motionPath: {
+                path: [
+                    { x: -100, y: 300 }, // Start off-screen middle-left (change this to modify the start point)
+                    { x: window.innerWidth / 2, y: -400 }, // Apex of the arc (you can adjust this for different curves)
+                    { x: window.innerWidth + 100, y: window.innerHeight / 2 } // End off-screen middle-right (end point)
+                ],
+                curviness: 1.5, // Controls the smoothness of the curve (higher values = smoother)
+                autoRotate: true // Makes the star rotate as it follows the path
+            },
+            ease: "power1.inOut", // Ease for a smooth start and stop
+            repeat: 0, // Infinite loop of the star movement
+            onUpdate: function () {
+                // Capture the current position of the star directly from the animation properties
+                const pos = star._gsap;
+
+                // Create a trail slightly behind the star
+                // Adjust the offset to change how far behind the star the trail is (default is +10)
+                createTrail(pos.x + 10, pos.y + 10); // Create trail at the star's current position
+            }
+        });
+
+        // Add sparkle effect to the star (you can adjust the glow effect)
+        gsap.to(star, {
+            duration: 0.5, // Duration for the sparkle effect (can adjust this for faster/slower sparkle)
+            boxShadow: "0 0 30px 10px gold, 0 0 60px 20px rgba(255, 223, 0, 0.8)", // Glowing effect
+            repeat: 0, // Infinite repeat
+            yoyo: true // Makes the glow pulse (goes back and forth)
+        });
+    </script>
+</body>
+</html>
